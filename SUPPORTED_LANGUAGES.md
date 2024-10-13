@@ -13,6 +13,7 @@ and [documentation](https://godoc.org/github.com/abadojack/whatlanggo).
 | Russian        | rus       | Rus |
 | Mandarin       | cmn       | Cmn |
 | Spanish        | spa       | Spa |
+| Catalan        | cat       | Cat |
 | Portuguese     | por       | Por |
 | Italian        | ita       | Ita |
 | Bengali        | ben       | Ben |

@@ -11,6 +11,7 @@ import (
 func TestDetect(t *testing.T) {
 	tests := map[string]Info{
 		"Además de todo lo anteriormente dicho, también encontramos...": {Spa, unicode.Latin, 1},
+		"A més de tot el que hem dit anteriorment, també trobem...":     {Cat, unicode.Latin, 1},
 		"बहुत बहुत (धन्यवाद / शुक्रिया)!":                               {Hin, unicode.Devanagari, 1},
 		"अनुच्छेद १: सबहि लोकानि आजादे जम्मेला आओर ओखिनियो के बराबर सम्मान आओर अघ्कार प्राप्त हवे। ओखिनियो के पास समझ-बूझ आओर अंत:करण के आवाज होखता आओर हुनको के दोसरा के साथ भाईचारे के बेवहार करे के होखला": {Bho, unicode.Devanagari, 1},
 		"ኢትዮጵያ አፍሪቃ ውስጥ ናት":         {Amh, unicode.Ethiopic, 1},
@@ -53,11 +54,12 @@ func TestDetect(t *testing.T) {
 func TestDetectLang(t *testing.T) {
 	tests := map[string]Lang{
 		"Та нічого, все нормально. А в тебе як?": Ukr,
-		"Vouloir, c'est pouvoir":                                Fra,
-		"Where there is a will there is a way":                  Eng,
-		"Mi ŝategas la japanan kaj studas ĝin kelkajn jarojn 😊": Epo,
-		"Te echo de menos":                                      Spa,
-		"Buona notte e sogni d'oro!":                            Ita,
+		"Vouloir, c'est pouvoir":                                    Fra,
+		"Where there is a will there is a way":                      Eng,
+		"Mi ŝategas la japanan kaj studas ĝin kelkajn jarojn 😊":     Epo,
+		"Te echo de menos":                                          Spa,
+		"M'encanta el japonès i fa uns quants anys que l'estudio 😊": Cat,
+		"Buona notte e sogni d'oro!":                                Ita,
 	}
 
 	for text, want := range tests {
