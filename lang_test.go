@@ -256,7 +256,7 @@ func TestLangToStringShort(t *testing.T) {
 		Ori: "or",
 		Orm: "om",
 		Pan: "pa",
-		Pes: "",
+		Pes: "fa",
 		Pol: "pl",
 		Por: "pt",
 		Ron: "ro",
