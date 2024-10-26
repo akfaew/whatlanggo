@@ -190,7 +190,7 @@ func TestWithMultipleExamples(t *testing.T) {
 		want := CodeToLang(lang)
 		info := Detect(text)
 		if info.Lang != want && !info.IsReliable() {
-			t.Fatalf("want %v, got %v", Langs[want], Langs[info.Lang])
+			t.Fatalf("%s: want %v, got %v", text, Langs[want], Langs[info.Lang])
 		}
 	}
 }

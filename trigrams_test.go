@@ -13,7 +13,7 @@ func TestCount(t *testing.T) {
 	}
 
 	for key, value := range tests {
-		got := count(key)
+		got := Count(key)
 
 		for key1, value1 := range value {
 			if got[key1] != value1 {

@@ -11,7 +11,7 @@ type trigram struct {
 	count   int
 }
 
-//convert punctuations and digits to space.
+// convert punctuations and digits to space.
 func toTrigramChar(ch rune) rune {
 	if isStopChar(ch) {
 		return ' '
@@ -20,7 +20,7 @@ func toTrigramChar(ch rune) rune {
 }
 
 func getTrigramsWithPositions(text string) map[string]int {
-	counterMap := count(text)
+	counterMap := Count(text)
 	trigrams := make([]trigram, len(counterMap))
 
 	i := 0
@@ -46,7 +46,7 @@ func getTrigramsWithPositions(text string) map[string]int {
 	return trigramsWithPositions
 }
 
-func count(text string) map[string]int {
+func Count(text string) map[string]int {
 	var r1, r2, r3 rune
 	trigrams := map[string]int{}
 	var txt []rune
