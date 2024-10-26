@@ -5,6 +5,7 @@ type Lang int
 
 // Aka ...
 const (
+	XXX Lang = -1 // No language detected
 	Afr Lang = iota
 	Aka
 	Amh
@@ -95,6 +96,7 @@ const (
 // CodeToLang gets enum by ISO 639-3 code as a string.
 func CodeToLang(code string) Lang {
 	lang := map[string]Lang{
+		"xxx": XXX,
 		"afr": Afr,
 		"aka": Aka,
 		"amh": Amh,
@@ -200,6 +202,7 @@ func (lang Lang) Iso6391() string {
 // compatibility. Please use `Lang.Iso6391()` instead.
 func LangToStringShort(lang Lang) string {
 	langMap := map[Lang]string{
+		XXX: "xx",
 		Afr: "af",
 		Aka: "ak",
 		Amh: "am",
@@ -304,6 +307,7 @@ func (lang Lang) Iso6393() string {
 // compatibility. Please use `Lang.Iso6393()` instead.
 func LangToString(lang Lang) string {
 	langMap := map[Lang]string{
+		XXX: "xxx",
 		Afr: "afr",
 		Aka: "aka",
 		Amh: "amh",
@@ -409,6 +413,7 @@ func (lang Lang) String() string {
 
 // Langs represents a map of Lang to language name.
 var Langs = map[Lang]string{
+	XXX: "no language detected",
 	Afr: "Afrikaans",
 	Aka: "Akan",
 	Amh: "Amharic",

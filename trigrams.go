@@ -74,6 +74,5 @@ func Count(text string) map[string]int {
 		r1 = r2
 		r2 = r3
 	}
-
 	return trigrams
 }
