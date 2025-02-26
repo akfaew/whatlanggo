@@ -1,3 +1,3 @@
-module github.com/inigosola/whatlanggo
+module github.com/akfaew/whatlanggo
 
-go 1.12
+go 1.23
