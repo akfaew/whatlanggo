@@ -26,6 +26,7 @@ func DetectWithOptions(text string, options Options) Info {
 	script := DetectScript(text)
 	if script != nil {
 		lang, confidence := detectLangBaseOnScript(text, options, script)
+
 		return Info{
 			Lang:       lang,
 			Script:     script,
@@ -115,6 +116,7 @@ func detectLangInProfiles(text string, options Options, langProfileList langProf
 				continue
 			}
 		}
+
 		dist, numberTrigrams := calculateDistance(langTrigrams, trigramWeights)
 		langDistances = append(langDistances, langDistance{lang, dist, numberTrigrams})
 	}
@@ -155,6 +157,7 @@ func calculateConfidence(langDistances []langDistance) (Lang, float64) {
 		if confidence > 1.0 {
 			confidence = 1.0
 		}
+
 		return langDist1.lang, confidence
 	}
 
@@ -169,7 +172,9 @@ func calculateConfidence(langDistances []langDistance) (Lang, float64) {
 	} else {
 		confidence = rate / confidentRate
 	}
+
 	confidence = math.Round(confidence*100) / 100
+
 	return langDist1.lang, confidence
 }
 
@@ -180,5 +185,6 @@ func calculateDistance(langTrigrams []string, textTrigramsWeights map[string]int
 			totalDist += (maxTrigramDistance - i) * textTrigramsWeights[trigram]
 		}
 	}
+
 	return totalDist, numberTrigrams
 }

@@ -2,7 +2,7 @@ package whatlanggo
 
 import (
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"os"
 	"testing"
 	"unicode"
@@ -73,6 +73,7 @@ func TestDetectLang(t *testing.T) {
 // Test detect with empty options and supported language and script
 func TestDetectWithOptionsEmptySupportedLang(t *testing.T) {
 	want := Info{Epo, unicode.Latin, 1}
+
 	got := DetectWithOptions("La viro amas hundojn. Hundo estas la plej bona amiko de viro", Options{})
 	if want.Lang != got.Lang && want.Script != got.Script {
 		t.Fatalf("want %v %v got %v %v", want.Lang, want.Script, got.Lang, got.Script)
@@ -82,6 +83,7 @@ func TestDetectWithOptionsEmptySupportedLang(t *testing.T) {
 // Test detect with empty options and nonsupported script(Balinese)
 func TestDetectWithOptionsEmptyNonSupportedLang(t *testing.T) {
 	want := Info{-1, nil, 0}
+
 	got := DetectWithOptions("ᬅᬓ᭄ᬱᬭᬯ᭄ᬬᬜ᭄ᬚᬦ", Options{})
 	if want.Lang != got.Lang && want.Script != got.Script {
 		t.Fatalf("want %v %v got %v %v", want.Lang, want.Script, got.Lang, got.Script)
@@ -98,6 +100,7 @@ func TestDetectWithOptionsWithBlacklist(t *testing.T) {
 		},
 	}
 	want := Info{-1, unicode.Hebrew, 1}
+
 	got := DetectWithOptions(text, options1)
 	if got.Lang != want.Lang && want.Script != got.Script {
 		t.Fatalf("Want %s %s got %s %s", LangToString(want.Lang), Scripts[want.Script], LangToString(got.Lang), Scripts[got.Script])
@@ -110,6 +113,7 @@ func TestDetectWithOptionsWithBlacklist(t *testing.T) {
 			Kur: true,
 		},
 	}
+
 	got = DetectWithOptions(text, options3)
 	if got.Lang != want.Lang && want.Script != got.Script {
 		t.Fatalf("Want %s %s got %s %s", LangToString(want.Lang), Scripts[want.Script], LangToString(got.Lang), Scripts[got.Script])
@@ -125,6 +129,7 @@ func TestWithOptionsWithWhitelist(t *testing.T) {
 			Ukr: true,
 		},
 	}
+
 	got := DetectWithOptions(text, options2)
 	if got.Lang != want.Lang && want.Script != got.Script {
 		t.Fatalf("Want %s %s got %s %s", LangToString(want.Lang), Scripts[want.Script], LangToString(got.Lang), Scripts[got.Script])
@@ -153,6 +158,7 @@ func TestDetectLangWithOptions(t *testing.T) {
 			Ilo: true,
 		},
 	}
+
 	got = DetectLangWithOptions(text, options)
 	if want != got {
 		t.Fatalf("want %s got %s", LangToString(want), LangToString(got))
@@ -161,6 +167,7 @@ func TestDetectLangWithOptions(t *testing.T) {
 
 func Test_detectLangBaseOnScriptUnsupportedScript(t *testing.T) {
 	want := Info{-1, nil, 0}
+
 	gotLang, gotConfidence := detectLangBaseOnScript("ᬅᬓ᭄ᬱᬭᬯ᭄ᬬᬜ᭄ᬚᬦ", Options{}, unicode.Balinese)
 	if want.Lang != gotLang && want.Confidence != gotConfidence {
 		t.Fatalf("want %v %v got %v %v", want.Lang, want.Script, gotLang, gotConfidence)
@@ -175,12 +182,13 @@ func TestWithMultipleExamples(t *testing.T) {
 
 	defer examplesFile.Close()
 
-	byteValue, err := ioutil.ReadAll(examplesFile)
+	byteValue, err := io.ReadAll(examplesFile)
 	if err != nil {
 		t.Fatal("Error reading testdata/examples.json")
 	}
 
 	var examples map[string]string
+
 	err = json.Unmarshal(byteValue, &examples)
 	if err != nil {
 		t.Fatal("Error Unmarshalling json")
@@ -188,6 +196,7 @@ func TestWithMultipleExamples(t *testing.T) {
 
 	for lang, text := range examples {
 		want := CodeToLang(lang)
+
 		info := Detect(text)
 		if info.Lang != want && !info.IsReliable() {
 			t.Fatalf("%s: want %v, got %v", text, Langs[want], Langs[info.Lang])

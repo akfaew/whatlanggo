@@ -90,9 +90,11 @@ func DetectScript(text string) *unicode.RangeTable {
 	jpCount := 0
 	max := 0
 	maxScript := &unicode.RangeTable{}
+
 	for _, script := range scriptCounter {
 		if script.count > max {
 			max = script.count
+
 			maxScript = script.script
 			if script.script == _HiraganaKatakana {
 				jpCount = max
