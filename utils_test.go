@@ -4,13 +4,13 @@ import "testing"
 
 func TestIsStopChar(t *testing.T) {
 	tests := map[rune]bool{
-		//Space
+		// Space
 		'\t': true, '\n': true, '\v': true, '\r': true, '\f': true, 0x85: true, 0xA0: true,
-		//Digits
+		// Digits
 		'0': true, '1': true, '2': true, '3': true, '5': true, '6': true, '9': true,
-		//Punct
+		// Punct
 		';': true, '!': true, '"': true,
-		//Symbol
+		// Symbol
 		'`': true,
 	}
 

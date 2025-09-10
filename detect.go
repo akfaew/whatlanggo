@@ -105,12 +105,12 @@ func detectLangInProfiles(text string, options Options, langProfileList langProf
 
 	for lang, langTrigrams := range langProfileList {
 		if len(options.Whitelist) != 0 {
-			//Skip non-whitelisted languages.
+			// Skip non-whitelisted languages.
 			if _, ok := options.Whitelist[lang]; !ok {
 				continue
 			}
 		} else if len(options.Blacklist) != 0 {
-			//skip blacklisted languages.
+			// skip blacklisted languages.
 			if _, ok := options.Blacklist[lang]; ok {
 				continue
 			}

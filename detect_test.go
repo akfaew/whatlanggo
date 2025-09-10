@@ -90,7 +90,7 @@ func TestDetectWithOptionsEmptyNonSupportedLang(t *testing.T) {
 
 func TestDetectWithOptionsWithBlacklist(t *testing.T) {
 	text := "האקדמיה ללשון העברית"
-	//All languages with Hebrew text blacklisted ... returns correct script but invalid language
+	// All languages with Hebrew text blacklisted ... returns correct script but invalid language
 	options1 := Options{
 		Blacklist: map[Lang]bool{
 			Heb: true,
@@ -134,13 +134,13 @@ func TestWithOptionsWithWhitelist(t *testing.T) {
 func TestDetectLangWithOptions(t *testing.T) {
 	text := "All evil come from a single cause ... man's inability to sit still in a room"
 	want := Eng
-	//without blacklist
+	// without blacklist
 	got := DetectLangWithOptions(text, Options{})
 	if want != got {
 		t.Fatalf("want %s got %s", LangToString(want), LangToString(got))
 	}
 
-	//with blacklist
+	// with blacklist
 	options := Options{
 		Blacklist: map[Lang]bool{
 			Jav: true,

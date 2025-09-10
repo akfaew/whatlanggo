@@ -78,7 +78,7 @@ func DetectScript(text string) *unicode.RangeTable {
 					return sc.script
 				}
 
-				//if script is found, move it closer to the front so that it be checked first.
+				// if script is found, move it closer to the front so that it be checked first.
 				if i > 0 {
 					scriptCounter[i], scriptCounter[i-1] = scriptCounter[i-1], scriptCounter[i]
 				}
@@ -86,7 +86,7 @@ func DetectScript(text string) *unicode.RangeTable {
 		}
 	}
 
-	//find the script that occurs the most in the text and return it.
+	// find the script that occurs the most in the text and return it.
 	jpCount := 0
 	max := 0
 	maxScript := &unicode.RangeTable{}
@@ -102,7 +102,7 @@ func DetectScript(text string) *unicode.RangeTable {
 
 	switch {
 	case max == 0:
-		//if no valid script is detected, return nil.
+		// if no valid script is detected, return nil.
 		return nil
 	case max != 0 && (maxScript == unicode.Han && jpCount > 0):
 		// If Hiragana or Katakana is included, even if judged as Mandarin,
