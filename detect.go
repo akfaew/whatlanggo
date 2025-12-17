@@ -153,7 +153,7 @@ func calculateConfidence(langDistances []langDistance) (Lang, float64) {
 		// * Text really matches one of the languages.
 		//
 		// Number 500.0 is based on experiments and common sense expectations.
-		confidence = float64((score1) / 500.0)
+		confidence = float64(score1) / 500.0
 		if confidence > 1.0 {
 			confidence = 1.0
 		}

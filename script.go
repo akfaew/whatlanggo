@@ -1,6 +1,9 @@
 package whatlanggo
 
-import "unicode"
+import (
+	"unicode"
+	"unicode/utf8"
+)
 
 type scriptCounter struct {
 	checkFunc func(r rune) bool
@@ -38,7 +41,7 @@ var Scripts = map[*unicode.RangeTable]string{
 
 // DetectScript returns only the script of the given text.
 func DetectScript(text string) *unicode.RangeTable {
-	halfLen := len(text) / 2
+	halfLen := utf8.RuneCountInString(text) / 2
 
 	scriptCounter := []scriptCounter{
 		{isLatin, unicode.Latin, 0},
