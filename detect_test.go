@@ -102,7 +102,7 @@ func TestDetectWithOptionsWithBlacklist(t *testing.T) {
 	require.Equalf(t, want.Lang, got.Lang, "text=%q", text)
 	require.Equalf(t, want.Script, got.Script, "text=%q", text)
 
-	text = "Tu me manques"
+	text = "Vouloir, c'est pouvoir"
 	want = Info{Fra, unicode.Latin, 1}
 	options3 := Options{
 		Blacklist: map[Lang]bool{

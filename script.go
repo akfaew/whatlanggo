@@ -78,7 +78,11 @@ func DetectScript(text string) *unicode.RangeTable {
 			if sc.checkFunc(ch) {
 				scriptCounter[i].count++
 				if scriptCounter[i].count > halfLen {
-					return sc.script
+					// Don't early-return Han: Japanese text may start with Kanji (Han) and only later
+					// include Hiragana/Katakana, which should classify the script as Japanese.
+					if sc.script != unicode.Han {
+						return sc.script
+					}
 				}
 
 				// if script is found, move it closer to the front so that it be checked first.
