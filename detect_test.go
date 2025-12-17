@@ -6,6 +6,8 @@ import (
 	"os"
 	"testing"
 	"unicode"
+
+	"github.com/stretchr/testify/require"
 )
 
 func TestDetect(t *testing.T) {
@@ -45,9 +47,8 @@ func TestDetect(t *testing.T) {
 	for key, value := range tests {
 		got := Detect(key)
 
-		if value.Lang != got.Lang || value.Script != got.Script {
-			t.Fatalf("%s want %v %v got %v %v", key, LangToString(value.Lang), Scripts[value.Script], LangToString(got.Lang), Scripts[got.Script])
-		}
+		require.Equalf(t, value.Lang, got.Lang, "text=%q", key)
+		require.Equalf(t, value.Script, got.Script, "text=%q", key)
 	}
 }
 
@@ -64,9 +65,7 @@ func TestDetectLang(t *testing.T) {
 
 	for text, want := range tests {
 		got := DetectLang(text)
-		if got != want {
-			t.Fatalf("%s want %v got %v", text, LangToString(want), LangToString(got))
-		}
+		require.Equalf(t, want, got, "text=%q", text)
 	}
 }
 
@@ -75,9 +74,8 @@ func TestDetectWithOptionsEmptySupportedLang(t *testing.T) {
 	want := Info{Epo, unicode.Latin, 1}
 
 	got := DetectWithOptions("La viro amas hundojn. Hundo estas la plej bona amiko de viro", Options{})
-	if want.Lang != got.Lang && want.Script != got.Script {
-		t.Fatalf("want %v %v got %v %v", want.Lang, want.Script, got.Lang, got.Script)
-	}
+	require.Equal(t, want.Lang, got.Lang)
+	require.Equal(t, want.Script, got.Script)
 }
 
 // Test detect with empty options and nonsupported script(Balinese)
@@ -85,9 +83,8 @@ func TestDetectWithOptionsEmptyNonSupportedLang(t *testing.T) {
 	want := Info{-1, nil, 0}
 
 	got := DetectWithOptions("ᬅᬓ᭄ᬱᬭᬯ᭄ᬬᬜ᭄ᬚᬦ", Options{})
-	if want.Lang != got.Lang && want.Script != got.Script {
-		t.Fatalf("want %v %v got %v %v", want.Lang, want.Script, got.Lang, got.Script)
-	}
+	require.Equal(t, want.Lang, got.Lang)
+	require.Equal(t, want.Script, got.Script)
 }
 
 func TestDetectWithOptionsWithBlacklist(t *testing.T) {
@@ -102,9 +99,8 @@ func TestDetectWithOptionsWithBlacklist(t *testing.T) {
 	want := Info{-1, unicode.Hebrew, 1}
 
 	got := DetectWithOptions(text, options1)
-	if got.Lang != want.Lang && want.Script != got.Script {
-		t.Fatalf("Want %s %s got %s %s", LangToString(want.Lang), Scripts[want.Script], LangToString(got.Lang), Scripts[got.Script])
-	}
+	require.Equalf(t, want.Lang, got.Lang, "text=%q", text)
+	require.Equalf(t, want.Script, got.Script, "text=%q", text)
 
 	text = "Tu me manques"
 	want = Info{Fra, unicode.Latin, 1}
@@ -115,9 +111,8 @@ func TestDetectWithOptionsWithBlacklist(t *testing.T) {
 	}
 
 	got = DetectWithOptions(text, options3)
-	if got.Lang != want.Lang && want.Script != got.Script {
-		t.Fatalf("Want %s %s got %s %s", LangToString(want.Lang), Scripts[want.Script], LangToString(got.Lang), Scripts[got.Script])
-	}
+	require.Equalf(t, want.Lang, got.Lang, "text=%q", text)
+	require.Equalf(t, want.Script, got.Script, "text=%q", text)
 }
 
 func TestWithOptionsWithWhitelist(t *testing.T) {
@@ -131,9 +126,8 @@ func TestWithOptionsWithWhitelist(t *testing.T) {
 	}
 
 	got := DetectWithOptions(text, options2)
-	if got.Lang != want.Lang && want.Script != got.Script {
-		t.Fatalf("Want %s %s got %s %s", LangToString(want.Lang), Scripts[want.Script], LangToString(got.Lang), Scripts[got.Script])
-	}
+	require.Equalf(t, want.Lang, got.Lang, "text=%q", text)
+	require.Equalf(t, want.Script, got.Script, "text=%q", text)
 }
 
 func TestDetectLangWithOptions(t *testing.T) {
@@ -141,9 +135,7 @@ func TestDetectLangWithOptions(t *testing.T) {
 	want := Eng
 	// without blacklist
 	got := DetectLangWithOptions(text, Options{})
-	if want != got {
-		t.Fatalf("want %s got %s", LangToString(want), LangToString(got))
-	}
+	require.Equal(t, want, got)
 
 	// with blacklist
 	options := Options{
@@ -160,46 +152,37 @@ func TestDetectLangWithOptions(t *testing.T) {
 	}
 
 	got = DetectLangWithOptions(text, options)
-	if want != got {
-		t.Fatalf("want %s got %s", LangToString(want), LangToString(got))
-	}
+	require.Equal(t, want, got)
 }
 
 func Test_detectLangBaseOnScriptUnsupportedScript(t *testing.T) {
 	want := Info{-1, nil, 0}
 
 	gotLang, gotConfidence := detectLangBaseOnScript("ᬅᬓ᭄ᬱᬭᬯ᭄ᬬᬜ᭄ᬚᬦ", Options{}, unicode.Balinese)
-	if want.Lang != gotLang && want.Confidence != gotConfidence {
-		t.Fatalf("want %v %v got %v %v", want.Lang, want.Script, gotLang, gotConfidence)
-	}
+	require.Equal(t, want.Lang, gotLang)
+	require.InDelta(t, want.Confidence, gotConfidence, 0)
 }
 
 func TestWithMultipleExamples(t *testing.T) {
 	examplesFile, err := os.Open("testdata/examples.json")
-	if err != nil {
-		t.Fatal("Error opening testdata/examples.json")
-	}
+	require.NoError(t, err)
 
 	defer examplesFile.Close()
 
 	byteValue, err := io.ReadAll(examplesFile)
-	if err != nil {
-		t.Fatal("Error reading testdata/examples.json")
-	}
+	require.NoError(t, err)
 
 	var examples map[string]string
 
 	err = json.Unmarshal(byteValue, &examples)
-	if err != nil {
-		t.Fatal("Error Unmarshalling json")
-	}
+	require.NoError(t, err)
 
 	for lang, text := range examples {
 		want := CodeToLang(lang)
 
 		info := Detect(text)
-		if info.Lang != want && !info.IsReliable() {
-			t.Fatalf("%s: want %v, got %v", text, Langs[want], Langs[info.Lang])
+		if info.IsReliable() {
+			require.Equalf(t, want, info.Lang, "text=%q", text)
 		}
 	}
 }

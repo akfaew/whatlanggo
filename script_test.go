@@ -3,6 +3,8 @@ package whatlanggo
 import (
 	"testing"
 	"unicode"
+
+	"github.com/stretchr/testify/require"
 )
 
 func TestDetectScript(t *testing.T) {
@@ -23,9 +25,7 @@ func TestDetectScript(t *testing.T) {
 
 	for text, want := range tests {
 		got := DetectScript(text)
-		if want != got {
-			t.Fatalf("%s want %s got %s", text, Scripts[want], Scripts[got])
-		}
+		require.Equalf(t, want, got, "text=%q", text)
 	}
 }
 
@@ -36,9 +36,7 @@ func TestIsLatin(t *testing.T) {
 
 	for r, want := range tests {
 		got := isLatin(r)
-		if want != got {
-			t.Fatalf("%#U want %t got %t", r, want, got)
-		}
+		require.Equalf(t, want, got, "r=%#U", r)
 	}
 }
 
@@ -49,9 +47,7 @@ func TestIsEthiopic(t *testing.T) {
 
 	for r, want := range tests {
 		got := isEthiopic(r)
-		if want != got {
-			t.Fatalf("%#U want %t got %t", r, want, got)
-		}
+		require.Equalf(t, want, got, "r=%#U", r)
 	}
 }
 
@@ -62,9 +58,7 @@ func TestIsGeorgian(t *testing.T) {
 
 	for r, want := range tests {
 		got := isGeorgian(r)
-		if want != got {
-			t.Fatalf("%#U want %t got %t", r, want, got)
-		}
+		require.Equalf(t, want, got, "r=%#U", r)
 	}
 }
 
@@ -75,9 +69,7 @@ func TestIsBengali(t *testing.T) {
 
 	for r, want := range tests {
 		got := isBengali(r)
-		if want != got {
-			t.Fatalf("%#U want %t got %t", r, want, got)
-		}
+		require.Equalf(t, want, got, "r=%#U", r)
 	}
 }
 
@@ -91,9 +83,7 @@ func TestIsHiraganaKatakana(t *testing.T) {
 
 	for r, want := range tests {
 		got := isHiraganaKatakana(r)
-		if want != got {
-			t.Fatalf("%#U want %t got %t", r, want, got)
-		}
+		require.Equalf(t, want, got, "r=%#U", r)
 	}
 }
 
@@ -104,9 +94,7 @@ func TestIsHangul(t *testing.T) {
 
 	for r, want := range tests {
 		got := isHangul(r)
-		if want != got {
-			t.Fatalf("%#U want %t got %t", r, want, got)
-		}
+		require.Equalf(t, want, got, "r=%#U", r)
 	}
 }
 
@@ -117,9 +105,7 @@ func TestIsGreek(t *testing.T) {
 
 	for r, want := range tests {
 		got := isGreek(r)
-		if want != got {
-			t.Fatalf("%#U want %t got %t", r, want, got)
-		}
+		require.Equalf(t, want, got, "r=%#U", r)
 	}
 }
 
@@ -130,9 +116,7 @@ func TestIsKannada(t *testing.T) {
 
 	for r, want := range tests {
 		got := isKannada(r)
-		if want != got {
-			t.Fatalf("%#U want %t got %t", r, want, got)
-		}
+		require.Equalf(t, want, got, "r=%#U", r)
 	}
 }
 
@@ -143,9 +127,7 @@ func TestIsTamil(t *testing.T) {
 
 	for r, want := range tests {
 		got := isTamil(r)
-		if want != got {
-			t.Fatalf("%#U want %t got %t", r, want, got)
-		}
+		require.Equalf(t, want, got, "r=%#U", r)
 	}
 }
 
@@ -156,9 +138,7 @@ func TestIsThai(t *testing.T) {
 
 	for r, want := range tests {
 		got := isThai(r)
-		if want != got {
-			t.Fatalf("%#U want %t got %t", r, want, got)
-		}
+		require.Equalf(t, want, got, "r=%#U", r)
 	}
 }
 
@@ -169,9 +149,7 @@ func TestIsGujarati(t *testing.T) {
 
 	for r, want := range tests {
 		got := isGujarati(r)
-		if want != got {
-			t.Fatalf("%#U want %t got %t", r, want, got)
-		}
+		require.Equalf(t, want, got, "r=%#U", r)
 	}
 }
 
@@ -182,9 +160,7 @@ func TestIsGurmukhi(t *testing.T) {
 
 	for r, want := range tests {
 		got := isGurmukhi(r)
-		if want != got {
-			t.Fatalf("%#U want %t got %t", r, want, got)
-		}
+		require.Equalf(t, want, got, "r=%#U", r)
 	}
 }
 
@@ -195,9 +171,7 @@ func TestIsTelugu(t *testing.T) {
 
 	for r, want := range tests {
 		got := isTelugu(r)
-		if want != got {
-			t.Fatalf("%#U want %t got %t", r, want, got)
-		}
+		require.Equalf(t, want, got, "r=%#U", r)
 	}
 }
 
@@ -208,8 +182,6 @@ func TestIsOriya(t *testing.T) {
 
 	for r, want := range tests {
 		got := isOriya(r)
-		if want != got {
-			t.Fatalf("%#U want %t got %t", r, want, got)
-		}
+		require.Equalf(t, want, got, "r=%#U", r)
 	}
 }

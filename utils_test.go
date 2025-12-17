@@ -1,6 +1,10 @@
 package whatlanggo
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/stretchr/testify/require"
+)
 
 func TestIsStopChar(t *testing.T) {
 	tests := map[rune]bool{
@@ -16,9 +20,7 @@ func TestIsStopChar(t *testing.T) {
 
 	for r, want := range tests {
 		got := isStopChar(r)
-		if got != want {
-			t.Fatalf("%v want %t got %t", r, want, got)
-		}
+		require.Equalf(t, want, got, "r=%#U", r)
 	}
 }
 
@@ -33,8 +35,6 @@ func TestAbs(t *testing.T) {
 
 	for x, want := range tests {
 		got := abs(x)
-		if got != want {
-			t.Fatalf("want %d got %d", want, got)
-		}
+		require.Equalf(t, want, got, "x=%d", x)
 	}
 }

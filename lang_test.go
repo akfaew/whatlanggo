@@ -1,6 +1,10 @@
 package whatlanggo
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/stretchr/testify/require"
+)
 
 func TestCodeToLang(t *testing.T) {
 	tests := map[string]Lang{
@@ -94,9 +98,7 @@ func TestCodeToLang(t *testing.T) {
 
 	for codeStr, lang := range tests {
 		got := CodeToLang(codeStr)
-		if got != lang {
-			t.Fatalf("%s: want %v got %v", codeStr, lang, got)
-		}
+		require.Equalf(t, lang, got, "code=%q", codeStr)
 	}
 }
 
@@ -192,9 +194,7 @@ func TestLangToString(t *testing.T) {
 
 	for lang, codeStr := range tests {
 		got := lang.Iso6393()
-		if got != codeStr {
-			t.Fatalf("%d: want %s got %s", lang, codeStr, got)
-		}
+		require.Equalf(t, codeStr, got, "lang=%d", lang)
 	}
 }
 
@@ -290,8 +290,6 @@ func TestLangToStringShort(t *testing.T) {
 
 	for lang, codeStr := range tests {
 		got := lang.Iso6391()
-		if got != codeStr {
-			t.Fatalf("%d: want %s got %s", lang, codeStr, got)
-		}
+		require.Equalf(t, codeStr, got, "lang=%d", lang)
 	}
 }

@@ -1,6 +1,10 @@
 package whatlanggo
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/stretchr/testify/require"
+)
 
 func TestCount(t *testing.T) {
 	tests := map[string]map[string]int{
@@ -16,9 +20,7 @@ func TestCount(t *testing.T) {
 		got := Count(key)
 
 		for key1, value1 := range value {
-			if got[key1] != value1 {
-				t.Fatalf("%s got %d want %d", key1, got[key1], value1)
-			}
+			require.Equalf(t, value1, got[key1], "text=%q trigram=%q", key, key1)
 		}
 	}
 }
@@ -33,8 +35,6 @@ func TestToTrigramChar(t *testing.T) {
 
 	for r, want := range tests {
 		got := toTrigramChar(r)
-		if got != want {
-			t.Fatalf("%q got %q want %q", r, got, want)
-		}
+		require.Equalf(t, want, got, "r=%#U", r)
 	}
 }
