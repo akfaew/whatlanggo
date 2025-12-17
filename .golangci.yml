@@ -1,0 +1,134 @@
+version: "2"
+issues:
+  max-same-issues: 0
+  max-issues-per-linter: 0
+linters:
+  settings:
+    wrapcheck:
+      ignore-package-globs:
+        - "github.com/akfaew/work/utils"
+  disable:
+    - gocognit
+    - gosec
+    - nestif
+    - nilnil
+    - noctx
+    - recvcheck
+    - forbidigo
+    - gosmopolitan
+    - dupl
+  enable:
+    - wrapcheck
+    - wsl_v5
+    - arangolint
+    - asasalint
+    - asciicheck
+    - bidichk
+    - bodyclose
+    - canonicalheader
+    - copyloopvar
+    - decorder
+    - dogsled
+    - durationcheck
+    - embeddedstructfieldcheck
+    - errcheck
+    - errname
+    - errorlint
+    - exptostd
+    - fatcontext
+    - funcorder
+    - ginkgolinter
+    - gocheckcompilerdirectives
+    - gochecksumtype
+    - gocritic
+    - goheader
+    - goprintffuncname
+    - gosmopolitan
+    - grouper
+    - iface
+    - importas
+    - interfacebloat
+    - loggercheck
+    - makezero
+    - mirror
+    - misspell
+    - musttag
+    - nakedret
+    - nilerr
+    - nilnesserr
+    - nlreturn
+    - nolintlint
+    - nosprintfhostport
+    - promlinter
+    - revive
+    - rowserrcheck
+    - sloglint
+    - spancheck
+    - testableexamples
+    - testifylint
+    - thelper
+    - tparallel
+    - unconvert
+    - unparam
+    - usestdlibvars
+    - usetesting
+    - whitespace
+    - zerologlint
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    rules:
+      - path: ^syften/tools/
+        linters:
+          - forbidigo
+        text: 'fmt\.Print*'
+      - path: ^syften/scrapers/mailinglists/new_token/
+        linters:
+          - forbidigo
+        text: 'fmt\.Print*'
+      - linters:
+          - govet
+        text: 'structtag: struct field tag'
+      - linters:
+          - noctx
+        text: '^net.Listen must not be called'
+      - linters:
+          - gosec
+        text: '^G114: Use of net/http serve function that has no support for setting timeouts'
+      - linters:
+          - gosec
+        text: '^G306: Expect WriteFile permissions to be 0600 or less'
+      - linters:
+          - gosec
+        text: '^G101: Potential hardcoded credentials'
+      - linters:
+          - perfsprint
+        text: '^error-format: fmt.Errorf can be replaced with errors.New'
+      - linters:
+          - revive
+        text: '^var-naming: avoid meaningless package names'
+      - linters:
+          - revive
+        text: '^redefines-builtin-id: redefinition of the built-in function max'
+      - linters:
+          - gocritic
+        text: '^appendAssign: append result not assigned to the same slice'
+
+    paths:
+      - scrapers/stackexchange/stackongo
+      - builtin$
+      - examples$
+      - third_party$
+      - vendor$
+formatters:
+  exclusions:
+    generated: lax
+    paths:
+      - builtin$
+      - examples$
+      - third_party$
+      - vendor$

@@ -198,7 +198,8 @@ func (lang Lang) Iso6391() string {
 
 // LangToStringShort converts enum into ISO 639-1 code as a string.
 // Return empty string when there is no ISO 639-1 code.
-// Deprecated: LangToStringShort is deprected and exists for historical
+//
+// Deprecated: LangToStringShort is deprecated and exists for historical
 // compatibility. Please use `Lang.Iso6391()` instead.
 func LangToStringShort(lang Lang) string {
 	langMap := map[Lang]string{
@@ -303,7 +304,8 @@ func (lang Lang) Iso6393() string {
 }
 
 // LangToString converts enum into ISO 639-3 code as a string.
-// Deprecated: LangToString is deprected and exists for historical
+//
+// Deprecated: LangToString is deprecated and exists for historical
 // compatibility. Please use `Lang.Iso6393()` instead.
 func LangToString(lang Lang) string {
 	langMap := map[Lang]string{
@@ -504,7 +506,7 @@ var Langs = map[Lang]string{
 // langProfileList ...
 type langProfileList map[Lang][]string
 
-//nolint
+// nolint
 // LatinLangs ...
 var latinLangs = langProfileList{
 	Spa: []string{" de", "os ", "de ", " la", "la ", " y ", " a ", "es ", "ón ", "ión", "rec", "ere", "der", " co", "e l", "el ", "en ", "ien", "cho", "ent", "ech", "ció", "aci", "o a", "a p", " el", "a l", "al ", "as ", "e d", " en", "na ", "ona", "s d", "da ", "nte", " to", "ad ", "ene", "con", " pr", " su", "tod", " se", "ho ", "los", " pe", "per", "ers", " lo", "o d", " ti", "cia", "n d", "cio", " es", "ida", "res", "a t", "tie", "ion", "rso", "te ", "do ", " in", "son", " re", " li", "to ", "dad", "tad", "e s", "est", "pro", "que", "men", " po", "a e", "oda", "nci", " qu", " un", "ue ", "ne ", "n e", "s y", "lib", "su ", " na", "s e", "nac", "ia ", "e e", "tra", " pa", "or ", "ado", "a d", "nes", "ra ", "se ", "ual", "a c", "er ", "por", "com", "nal", "rta", "a s", "ber", " o ", "one", "s p", "dos", "rá ", "sta", "les", "des", "ibe", "ser", "era", "ar ", "ert", "ter", " di", "ale", "l d", "nto", "hos", "del", "ica", "a a", "s n", "n c", "oci", "imi", "io ", "o e", "re ", "y l", "e c", "ant", "cci", " as", "las", "par", "ame", " cu", "ici", "ara", "enc", "s t", "ndi", " so", "o s", "mie", "tos", "una", "bre", "dic", "cla", "s l", "e a", "l p", "pre", "ntr", "o t", "ial", "y a", "nid", "n p", "a y", "man", "omo", "so ", "n l", " al", "ali", "s a", "no ", " ig", "s s", "e p", "nta", "uma", "ten", "gua", "ade", "y e", "soc", "mo ", " fu", "igu", "o p", "n t", "hum", "d d", "ran", "ria", "y d", "ada", "tiv", "l e", "cas", " ca", "vid", "l t", "s c", "ido", "das", "dis", "s i", " hu", "s o", "nad", "fun", " ma", "rac", "nda", "eli", "sar", "und", " ac", "uni", "mbr", "a u", "die", "e i", "qui", "a i", " ha", "lar", " tr", "odo", "ca ", "tic", "o y", "cti", "lid", "ori", "ndo", "ari", " me", "ta ", "ind", "esa", "cua", "un ", "ier", "tal", "esp", "seg", "ele", "ons", "ito", "ont", "iva", "s h", "d y", "nos", "ist", "rse", " le", "cie", "ide", "edi", "ecc", "ios", "l m", "r e", "med", "tor", "sti", "n a", "rim", "uie", "ple", "tri", "ibr", "sus", "lo ", "ect", "pen", "y c", "an ", "e h", "n s", "ern", "tar", "l y", "egu", "gur", "ura", "int", "ond", "mat", "l r", "r a", "isf", "ote"},
